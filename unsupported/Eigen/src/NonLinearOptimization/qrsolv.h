@@ -1,5 +1,3 @@
-namespace Eigen { 
-
 namespace internal {
 
 // TODO : once qrsolv2 is removed, use ColPivHouseholderQR or PermutationMatrix instead of ipvt
@@ -87,5 +85,3 @@ void qrsolv(
 }
 
 } // end namespace internal
-
-} // end namespace Eigen

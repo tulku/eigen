@@ -6,14 +6,27 @@
 //
 // Copyright (C) 2009 Thomas Capricelli <orzel@freehackers.org>
 //
-// This Source Code Form is subject to the terms of the Mozilla
-// Public License v. 2.0. If a copy of the MPL was not distributed
-// with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
+// Eigen is free software; you can redistribute it and/or
+// modify it under the terms of the GNU Lesser General Public
+// License as published by the Free Software Foundation; either
+// version 3 of the License, or (at your option) any later version.
+//
+// Alternatively, you can redistribute it and/or
+// modify it under the terms of the GNU General Public License as
+// published by the Free Software Foundation; either version 2 of
+// the License, or (at your option) any later version.
+//
+// Eigen is distributed in the hope that it will be useful, but WITHOUT ANY
+// WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+// FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License or the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU Lesser General Public
+// License and a copy of the GNU General Public License along with
+// Eigen. If not, see <http://www.gnu.org/licenses/>.
 
 #ifndef EIGEN_NUMERICAL_DIFF_H
 #define EIGEN_NUMERICAL_DIFF_H
-
-namespace Eigen { 
 
 enum NumericalDiffMode {
     Forward,
@@ -63,13 +76,11 @@ public:
      */
     int df(const InputType& _x, JacobianType &jac) const
     {
-        using std::sqrt;
-        using std::abs;
         /* Local variables */
         Scalar h;
         int nfev=0;
         const typename InputType::Index n = _x.size();
-        const Scalar eps = sqrt(((std::max)(epsfcn,NumTraits<Scalar>::epsilon() )));
+        const Scalar eps = internal::sqrt(((std::max)(epsfcn,NumTraits<Scalar>::epsilon() )));
         ValueType val1, val2;
         InputType x = _x;
         // TODO : we should do this only if the size is not already known
@@ -86,12 +97,12 @@ public:
                 // do nothing
                 break;
             default:
-                eigen_assert(false);
+                assert(false);
         };
 
         // Function Body
         for (int j = 0; j < n; ++j) {
-            h = eps * abs(x[j]);
+            h = eps * internal::abs(x[j]);
             if (h == 0.) {
                 h = eps;
             }
@@ -112,7 +123,7 @@ public:
                     jac.col(j) = (val2-val1)/(2*h);
                     break;
                 default:
-                    eigen_assert(false);
+                    assert(false);
             };
         }
         return nfev;
@@ -122,8 +133,6 @@ private:
 
     NumericalDiff& operator=(const NumericalDiff&);
 };
-
-} // end namespace Eigen
 
 //vim: ai ts=4 sts=4 et sw=4
 #endif // EIGEN_NUMERICAL_DIFF_H

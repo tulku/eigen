@@ -1,6 +1,6 @@
 set(Eigen_HEADERS AdolcForward BVH IterativeSolvers MatrixFunctions MoreVectorization AutoDiff AlignedVector3 Polynomials
-                  FFT NonLinearOptimization SparseExtra IterativeSolvers
-                  NumericalDiff Skyline MPRealSupport OpenGLSupport KroneckerProduct Splines LevenbergMarquardt
+                  CholmodSupport FFT NonLinearOptimization SparseExtra SuperLUSupport UmfPackSupport IterativeSolvers
+                  NumericalDiff Skyline MPRealSupport OpenGLSupport
    )
 
 install(FILES
